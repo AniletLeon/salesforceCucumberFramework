@@ -1,0 +1,29 @@
+package com.training.base;
+
+import java.io.IOException;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import com.training.utilities.CommonUtilities;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class BaseTest {
+	protected static WebDriver driver;
+	CommonUtilities common = new CommonUtilities();
+
+	public void launchapplication() throws IOException {
+		driver = getDriver();
+		String url = common.getproperty("url");
+		driver.get(url);
+	}
+
+	public static WebDriver getDriver() {
+		if (driver == null) {
+			WebDriverManager.chromedriver().setup();
+			driver = new ChromeDriver();
+		}
+		return driver;
+	}
+}
